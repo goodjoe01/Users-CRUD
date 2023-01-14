@@ -20,6 +20,7 @@ interface UserContextProps {
   userState: UserState
   GetUsers: () => void
   AddUser: (user : User) =>void
+  DeleteUser: (user : User) => void
 }
 
 interface props {
@@ -47,8 +48,12 @@ export const UserProvider = ({children} : props) =>{
     userDispatch({type: 'ADD_USER', user: {...user, id:v4()}})
   }
   
+  const DeleteUser = (user: User) =>{
+    userDispatch({type:'DELETE_USER', id: user.id as string})
+  }
+
   return (
-    <UserContext.Provider value={{userState, GetUsers, AddUser}}>
+    <UserContext.Provider value={{userState, GetUsers, AddUser, DeleteUser}}>
       {children}
     </UserContext.Provider>
   )
