@@ -11,3 +11,7 @@ export const getUsers = ()=>{
 export const addUser = (user: User) =>{
   axios.post('https://reqres.in/api/users', user).then(function (response) {console.log(response)}).catch(function (error) {console.log(error)})
 }
+
+export const deleteUser = (id: string) =>{
+  axios.delete(`https://reqres.in/api/users/${id}`).then(res=>console.log(res));
+}
