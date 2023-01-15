@@ -39,10 +39,19 @@ const UserForm = () => {
   const [user, setUser] = useState<User>(initialUser);
   const navigate = useNavigate();
 
-  useEffect(()=>{     
-    console.log('param:',params.id);
-    console.log('userState.users:',userState.users);
-    const userFound = userState.users.find(user => user.id === params.id);
+  useEffect(()=>{ 
+    
+    const users = userState.users.map(user=>{
+      return {
+        id: user.id.toString(),
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        avatar: user.avatar
+      }
+    })
+
+    const userFound = users.find(user => user.id === params.id);
 
     if(userFound) {
       setUser(userFound);

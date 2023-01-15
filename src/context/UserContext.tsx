@@ -7,7 +7,7 @@ import {v4} from 'uuid'
 let initialState: UserState = {
    users: [
     {
-      id: ' ',
+      id: '',
       email: '1',
       first_name: '33asas',
       last_name: '4',

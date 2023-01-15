@@ -2,9 +2,8 @@ import axios from 'axios'
 import {Response, User } from '../interfaces/userInterface';
 
 export const getUsers = ()=>{
-  const data = axios.get<Response>('https://reqres.in/api/users').then((res)=>res.data.data);
+  const data = axios.get<Response>('https://reqres.in/api/users').then((res)=>res.data.data)
 
-/*   console.log(data) */
   return data;
 }
 
