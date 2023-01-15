@@ -1,13 +1,13 @@
 import {createContext, useReducer} from 'react'
 import { User, UserState } from '../interfaces/userInterface';
 import { userReducer } from './UserReducer';
-import { getUsers, addUser } from '../fetching/userFetch';
+import { getUsers } from '../fetching/userReq';
 import {v4} from 'uuid'
 
 let initialState: UserState = {
    users: [
     {
-      id: null,
+      id: ' ',
       email: '1',
       first_name: '33asas',
       last_name: '4',
@@ -20,6 +20,7 @@ interface UserContextProps {
   userState: UserState
   GetUsers: () => void
   AddUser: (user : User) =>void
+  UpdateUsers: (user: User) => void
   DeleteUser: (user : User) => void
 }
 
@@ -30,12 +31,6 @@ interface props {
 export const UserContext = createContext<UserContextProps>({} as UserContextProps);
 
 export const UserProvider = ({children} : props) =>{
-
-  /* getData().then((data=>{
-    initialState={users: data}
-    console.log('initial:')
-    console.log(initialState.users);
-  })); */
 
   const [userState, userDispatch] = useReducer(userReducer, initialState);
 
@@ -52,8 +47,12 @@ export const UserProvider = ({children} : props) =>{
     userDispatch({type:'DELETE_USER', id: user.id as string})
   }
 
+  const UpdateUsers = (user: User) =>{
+    userDispatch({type: 'UPDATE_USERS', user})
+  }
+
   return (
-    <UserContext.Provider value={{userState, GetUsers, AddUser, DeleteUser}}>
+    <UserContext.Provider value={{userState, GetUsers, AddUser, DeleteUser, UpdateUsers}}>
       {children}
     </UserContext.Provider>
   )

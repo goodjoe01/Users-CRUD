@@ -15,3 +15,12 @@ export const addUser = (user: User) =>{
 export const deleteUser = (id: string) =>{
   axios.delete(`https://reqres.in/api/users/${id}`).then(res=>console.log(res));
 }
+
+export const updateUser = (user: User) =>{
+  axios.put(`https://reqres.in/api/users/${user.id}`, user)
+}
+
+/* export const getUser = async (id: string) => {
+  const data = await axios.get<User>(`https://reqres.in/api/users/${id}`);
+  return data.data;
+} */
