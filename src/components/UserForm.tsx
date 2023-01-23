@@ -34,14 +34,13 @@ const UserForm = () => {
     avatar: ''
   }
 
-  const {userState} = useContext(UserContext);
+  const {userState, AddUser, UpdateUser} = useContext(UserContext);
   const params = useParams();
   const [user, setUser] = useState<User>(initialUser);
   const navigate = useNavigate();
 
   useEffect(()=>{ 
-    
-    const users = userState.users.map(user=>{
+/*     const users = userState.users.map(user=>{
       return {
         id: user.id.toString(),
         email: user.email,
@@ -49,9 +48,9 @@ const UserForm = () => {
         last_name: user.last_name,
         avatar: user.avatar
       }
-    })
+    }) */
 
-    const userFound = users.find(user => user.id === params.id);
+    const userFound = userState.users.find(user => user.id === params.id);
 
     if(userFound) {
       setUser(userFound);
@@ -65,20 +64,38 @@ const UserForm = () => {
     setUser({...user, [e.target.name]: e.target.value})
   }
 
-/*   const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if(user.id){
+      console.log('actualizando')
+      UpdateUser(user);
+    }else {
+      console.log('creando')
+      AddUser(user);
+    }
+
     navigate('/');
-  } */
+  }
 
   return (
     <div className='card'>
       <div className="card-content">
-        <form action="">
+        <h2 className='title is-size-3'>
+          {
+            user.id ? 'Edit User' : 'Create User'         
+          }
+        </h2>
+        <form onSubmit={handleSubmit}>
           <Input name='first_name' label='First Name' pHolder='first name' value={user.first_name} onChange={handleOnChange} />
           <Input name='last_name' label='Last Name' pHolder='last name' value={user.last_name} onChange={handleOnChange} />
           <Input name='email' label='E-mail' pHolder='e-mail' value={user.email} onChange={handleOnChange} />
           <File/>
-          <button>Update Task</button>
+          <button>
+            {
+              user.id ? 'Update user' : 'Create user'
+            }
+            </button>
         </form>
 
       </div>

@@ -12,6 +12,7 @@ function App() {
         <Routes>
           <Route path='/'element={<UserList/>} ></Route>
           <Route path='/edit/:id' element={<UserForm/>}></Route>
+          <Route path='/add' element={<UserForm/>}></Route>
         </Routes>
       </UserProvider>
     </div>
