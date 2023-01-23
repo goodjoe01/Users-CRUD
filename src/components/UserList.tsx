@@ -1,29 +1,22 @@
-import React, {useState, useEffect, useContext} from 'react'
-import { getUsers } from '../fetching/userReq';
-import { Response, User } from '../interfaces/userInterface';
+import React, { useEffect, useContext} from 'react'
 import { UserContext } from '../context/UserContext';
+import { Link } from 'react-router-dom';
 import { UserItem } from './UserItem';
 
 const UserList = () => {
 
-  const {userState, GetUsers, AddUser} = useContext(UserContext);
-  const userTest = {
-    id: '30',
-    email: 'test@gmail.com',
-    first_name: 'Test',
-    last_name: 'Test',
-    avatar: 'Test.jpg'
-  }
+  const {userState, GetUsers} = useContext(UserContext);
     
   useEffect(()=>{
     GetUsers();
   }, []);
 
-  console.log(userState.users);
   return (
     <div>
       <h1>User List</h1>
-      <button onClick={()=>AddUser(userTest)}>Add User</button>
+      <Link to={'/add'} >
+        <button>Add User</button>
+      </Link>
        <div>
         {         
           userState.users?.map((user)=>(

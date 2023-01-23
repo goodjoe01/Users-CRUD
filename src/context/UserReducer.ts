@@ -18,7 +18,9 @@ export const userReducer = (state: UserState, action: UserAction): UserState =>{
     case 'ADD_USER':
       addUser(action.user);
       return {
-        users: [...state.users, action.user]
+        /* ...state,
+        users: [...state.users, action.user] */
+        users: state.users
       }
     case 'DELETE_USER':
       deleteUser(action.id);

@@ -7,7 +7,7 @@ import {v4} from 'uuid'
 let initialState: UserState = {
    users: [
     {
-      id: ' ',
+      id: '',
       email: '1',
       first_name: '33asas',
       last_name: '4',
@@ -20,7 +20,7 @@ interface UserContextProps {
   userState: UserState
   GetUsers: () => void
   AddUser: (user : User) =>void
-  UpdateUsers: (user: User) => void
+  UpdateUser: (user: User) => void
   DeleteUser: (user : User) => void
 }
 
@@ -36,6 +36,7 @@ export const UserProvider = ({children} : props) =>{
 
   const GetUsers = async () =>{
     const users = await getUsers();
+    console.log('users',users)
     userDispatch({type:'GET_USERS', payload: users})
   }
 
@@ -44,15 +45,15 @@ export const UserProvider = ({children} : props) =>{
   }
   
   const DeleteUser = (user: User) =>{
-    userDispatch({type:'DELETE_USER', id: user.id as string})
+    userDispatch({type:'DELETE_USER', id: user.id})
   }
 
-  const UpdateUsers = (user: User) =>{
+  const UpdateUser = (user: User) =>{
     userDispatch({type: 'UPDATE_USERS', user})
   }
 
   return (
-    <UserContext.Provider value={{userState, GetUsers, AddUser, DeleteUser, UpdateUsers}}>
+    <UserContext.Provider value={{userState, GetUsers, AddUser, DeleteUser, UpdateUser}}>
       {children}
     </UserContext.Provider>
   )
