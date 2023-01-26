@@ -9,16 +9,16 @@ export const getUsers = ()=>{
   return data;
 }
 
-export const addUser = (user: User) =>{
-  axios.post(API, user).then(function (response) {console.log('RESPONSE:',response)}).catch(function (error) {console.log(error)})
+export const addUser = async (user: User) =>{
+  await axios.post(API, user);
 }
 
-export const deleteUser = (id: string) =>{
-  axios.delete(`${API}/${id}`).then(res=>console.log(res));
+export const deleteUser = async (id: string) =>{
+  await axios.delete(`${API}/${id}`);
 }
 
-export const updateUser = (user: User) =>{
-  axios.put(`${API}/${user.id}`, user)
+export const updateUser = async (user: User) =>{
+  await axios.put(`${API}/${user.id}`, user)
 }
 
 /* export const getUser = async (id: string) => {

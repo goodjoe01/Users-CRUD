@@ -16,21 +16,28 @@ export const userReducer = (state: UserState, action: UserAction): UserState =>{
         users: [...action.payload]
       }
     case 'ADD_USER':
-      addUser(action.user);
+      /* addUser(action.user); */
       return {
-        /* ...state,
-        users: [...state.users, action.user] */
-        users: state.users
+        ...state,
+        users: [...state.users, action.user]
+        /* users: state.users */
       }
     case 'DELETE_USER':
-      deleteUser(action.id);
+      /* deleteUser(action.id); */
       return {
+        ...state,
         users: state.users.filter(user => user.id !== action.id)
       }
     case 'UPDATE_USERS':
-      updateUser(action.user)
+      /* updateUser(action.user) */
       return {
-        users: state.users
+        ...state,
+        users: state.users.map(user => {
+          if (user.id === action.user.id) {
+            return action.user;
+          }
+          return user;
+        }),
       }
     default:
       console.log('Hola hay un error')
